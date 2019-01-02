@@ -8,9 +8,9 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 # Import the model we are using
 from sklearn.ensemble import RandomForestRegressor
-
+from sklearn.datasets import make_regression
 # Read in data  
-features = pd.read_csv('temps.csv')
+features = pd.read_csv('/home/rob/git/alpha_advantage_stock_project/MSFT.csv')
 
 # Display first 5 rows
 # print(features.head(5))
@@ -28,10 +28,10 @@ features = pd.get_dummies(features)
 #print(features.iloc[:,5:].head(5))
 
 # Labels are the values we want to predict
-labels = np.array(features['actual'])
+labels = np.array(features['close'])
 # Remove the labels from the features
 # axis 1 refers to the columns
-features= features.drop('actual', axis = 1)
+features= features.drop('close', axis = 1)
 # Saving feature names for later use
 feature_list = list(features.columns)
 # Convert to numpy array
@@ -62,8 +62,11 @@ predictions = rf.predict(test_features)
 # Calculate the absolute errors
 errors = abs(predictions - test_labels)
 # Print out the mean absolute error (mae)
-print('Mean Absolute Error:', round(np.mean(errors), 2), 'degrees.')
+print('Mean Absolute Error:', round(np.mean(errors), 2), '$.')
 
+# show the inputs and predicted outputs
+# for i in range(0,3)):
+print(rf.predict(2))
 
 # Use datetime for creating date objects for plotting
 import datetime
